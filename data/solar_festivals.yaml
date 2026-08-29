@@ -1,10 +1,3 @@
-- name: 元旦
-  slug: new-year-day
-  type: solar
-  month: 1
-  day: 1
-  category: china
-  description: 公历一月一日
 - name: 妇女节
   slug: international-womens-day
   type: solar
@@ -40,11 +33,3 @@
   day: 10
   category: china
   description: 公历九月十日
-- name: 国庆节
-  slug: national-day
-  type: solar
-  month: 10
-  day: 1
-  category: china
-  description: 公历十月一日
-

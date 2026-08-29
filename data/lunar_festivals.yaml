@@ -1,10 +1,3 @@
-- name: 春节
-  slug: spring-festival
-  type: lunar
-  month: 1
-  day: 1
-  category: traditional
-  description: 农历正月初一
 - name: 元宵节
   slug: lantern-festival
   type: lunar
@@ -26,19 +19,6 @@
   day: 3
   category: traditional
   description: 农历三月初三
-- name: 清明节
-  slug: qingming-festival
-  type: solar_term_festival
-  term: 清明
-  category: traditional
-  description: 二十四节气中的清明
-- name: 端午节
-  slug: dragon-boat-festival
-  type: lunar
-  month: 5
-  day: 5
-  category: traditional
-  description: 农历五月初五
 - name: 七夕
   slug: qixi-festival
   type: lunar
@@ -53,13 +33,6 @@
   day: 15
   category: traditional
   description: 农历七月十五
-- name: 中秋节
-  slug: mid-autumn-festival
-  type: lunar
-  month: 8
-  day: 15
-  category: traditional
-  description: 农历八月十五
 - name: 重阳节
   slug: double-ninth-festival
   type: lunar
@@ -102,9 +75,3 @@
   day: 24
   category: traditional
   description: 农历腊月二十四
-- name: 除夕
-  slug: lunar-new-years-eve
-  type: lunar_new_year_eve
-  category: traditional
-  description: 农历腊月最后一日
-

@@ -15,10 +15,9 @@ class CalendarGenerationTests(unittest.TestCase):
     def test_lunar_conversion_and_new_years_eve(self) -> None:
         events = generate.lunar_events(generate.enabled_entries("lunar_festivals.yaml"), 2020, 2024)
         dates = {(event.name, event.day) for event in events}
-        self.assertIn(("春节", date(2020, 1, 25)), dates)
-        self.assertIn(("端午节", date(2023, 6, 22)), dates)
-        self.assertIn(("中秋节", date(2024, 9, 17)), dates)
-        self.assertIn(("除夕", date(2024, 2, 9)), dates)
+        self.assertIn(("元宵节", date(2020, 2, 8)), dates)
+        self.assertIn(("七夕", date(2023, 8, 22)), dates)
+        self.assertIn(("重阳节", date(2024, 10, 11)), dates)
 
     def test_solar_terms(self) -> None:
         terms = generate.solar_terms_for_year(2024)
@@ -57,8 +56,8 @@ class CalendarGenerationTests(unittest.TestCase):
                 self.assertNotIn("VALARM", payload)
 
     def test_uid_is_stable(self) -> None:
-        event = generate.Event(date(2027, 10, 6), "中秋节", "mid-autumn-festival", "traditional", "农历八月十五")
-        self.assertEqual(event.uid, "mid-autumn-festival-20271006@china-calendar")
+        event = generate.Event(date(2027, 10, 17), "重阳节", "double-ninth-festival", "traditional", "农历九月初九")
+        self.assertEqual(event.uid, "double-ninth-festival-20271017@china-calendar")
 
     def test_full_configured_range_has_unique_uids(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
@@ -66,6 +65,13 @@ class CalendarGenerationTests(unittest.TestCase):
         for filename, events in feeds.items():
             uids = [event.uid for event in events]
             self.assertEqual(len(uids), len(set(uids)), filename)
+
+    def test_apple_statutory_holidays_are_excluded(self) -> None:
+        excluded = {"元旦", "春节", "除夕", "清明节", "端午节", "中秋节", "国庆节"}
+        with tempfile.TemporaryDirectory() as temp:
+            feeds = generate.build(2024, 2025, Path(temp))
+        for filename, events in feeds.items():
+            self.assertTrue(excluded.isdisjoint(event.name for event in events), filename)
 
 
 if __name__ == "__main__":
