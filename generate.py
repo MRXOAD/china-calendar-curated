@@ -13,6 +13,7 @@ from typing import Any, Iterable
 
 import yaml
 from lunar_python import Lunar, LunarYear, Solar
+from apple_reference import load_covered_names, occasion_name
 
 
 ROOT = Path(__file__).resolve().parent
@@ -205,15 +206,18 @@ def build(start: int | None = None, end: int | None = None, output: Path = DIST_
     )
     traditional = lunar_events(enabled_entries("lunar_festivals.yaml"), start, end)
     terms = term_events(start, end)
+    apple_covered = load_covered_names()
     feeds = {
         "festival.ics": unique(solar + traditional),
         "lunar.ics": unique(traditional + terms),
         "lunar-terms.ics": unique(terms),
-        "all.ics": unique(solar + traditional + terms),
+        # Treat a known Apple occasion as covered in every year, even beyond
+        # Apple's current date window. This is a supplement, not a gap filler.
+        "all.ics": unique(event for event in solar + traditional + terms if occasion_name(event.name) not in apple_covered),
     }
     output.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    names = {"festival.ics": "精选节日与纪念日", "lunar.ics": "农历传统节日与二十四节气", "lunar-terms.ics": "二十四节气", "all.ics": "精选中国节日、农历与二十四节气"}
+    names = {"festival.ics": "精选节日与纪念日", "lunar.ics": "农历传统节日与二十四节气", "lunar-terms.ics": "二十四节气", "all.ics": "中华节日补充日历"}
     for filename, events in feeds.items():
         (output / filename).write_text(render_calendar(events, names[filename], config, stamp), encoding="utf-8", newline="")
     return feeds
