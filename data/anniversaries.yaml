@@ -1,4 +1,6 @@
 - name: 中国人民警察节
+  start_year: 2021
+  source: https://www.beijing.gov.cn/zhengce/zhengcefagui/202007/t20200721_1954388.html
   slug: peoples-police-day
   type: solar
   month: 1
@@ -6,6 +8,8 @@
   category: anniversary
   description: 公历一月十日
 - name: 全民国家安全教育日
+  start_year: 2016
+  source: https://www.cac.gov.cn/2016-04/14/c_1118625805.htm
   slug: national-security-education-day
   type: solar
   month: 4
@@ -13,6 +17,8 @@
   category: anniversary
   description: 公历四月十五日
 - name: 全国防灾减灾日
+  start_year: 2009
+  source: https://www.samr.gov.cn/xw/mtjj/art/2023/art_06f8c1a7f4914e1ea2c0b293819399df.html
   slug: disaster-prevention-day
   type: solar
   month: 5
@@ -20,6 +26,8 @@
   category: anniversary
   description: 公历五月十二日
 - name: 中国医师节
+  start_year: 2018
+  source: https://app.www.gov.cn/govdata/gov/201711/20/415363/article.html
   slug: physicians-day
   type: solar
   month: 8
@@ -27,6 +35,8 @@
   category: anniversary
   description: 公历八月十九日
 - name: 烈士纪念日
+  start_year: 2014
+  source: https://yjt.hunan.gov.cn/yjt/tszt/fdbnl/202109/t20210906_20530224.html
   slug: martyrs-day
   type: solar
   month: 9
@@ -34,6 +44,8 @@
   category: anniversary
   description: 公历九月三十日
 - name: 国家宪法日
+  start_year: 2014
+  source: https://www.slrd.gov.cn/pc/index/article/79902
   slug: constitution-day
   type: solar
   month: 12
@@ -41,6 +53,8 @@
   category: anniversary
   description: 公历十二月四日
 - name: 南京大屠杀死难者国家公祭日
+  start_year: 2014
+  source: https://www.hengqin.gov.cn/lab/flfg/fl/content/post_3523275.html
   slug: nanjing-national-memorial-day
   type: solar
   month: 12

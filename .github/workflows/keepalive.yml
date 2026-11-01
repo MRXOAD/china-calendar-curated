@@ -1,0 +1,24 @@
+name: Keep calendar publishing active
+
+on:
+  schedule:
+    - cron: "43 3 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: calendar-keepalive
+  cancel-in-progress: false
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Keep scheduled workflows active without changing feeds
+        run: bash scripts/keepalive.sh

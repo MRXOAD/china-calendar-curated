@@ -66,6 +66,8 @@ def validate_entry(entry: dict[str, Any], filename: str) -> None:
             raise ValueError(f"{filename}: {key} is required")
     if not SAFE_SLUG.fullmatch(entry["slug"]):
         raise ValueError(f"{filename}: invalid slug {entry['slug']!r}")
+    if "start_year" in entry and (type(entry["start_year"]) is not int or not 1 <= entry["start_year"] <= 9999):
+        raise ValueError(f"{filename}: start_year must be an integer from 1 to 9999")
 
 
 def nth_weekday(year: int, month: int, weekday: str, nth: int) -> date:
@@ -81,6 +83,8 @@ def solar_events(entries: Iterable[dict[str, Any]], start: int, end: int) -> lis
     events: list[Event] = []
     for year in range(start, end + 1):
         for entry in entries:
+            if year < entry.get("start_year", 1):
+                continue
             kind = entry["type"]
             if kind == "solar":
                 event_date = date(year, int(entry["month"]), int(entry["day"]))
